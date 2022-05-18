@@ -9,7 +9,13 @@ conda install -c conda-forge lightgbm -y
 conda install -c conda-forge tensorflow -y
 conda install -c conda-forge keras -y
 conda install -c conda-forge optuna -y
+conda install -c conda-forge umap-learn -y
 conda install -c conda-forge biopython -y
 conda install -c conda-forge rdkit -y
 pip install 'bio-embeddings[all]'
 pip install ilearnplus
+
+# install PyBioMed
+git clone https://github.com/gadsbyfly/PyBioMed
+cd ./PyBioMed
+python setup.py install
