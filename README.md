@@ -59,4 +59,5 @@ Bio-embeddings is a Python package to calculate sequence embedding for amino aci
 2. **PyBioMed**  
 [PyBioMed](https://github.com/gadsbyfly/PyBioMed) is a Python package to calculate not only protein descriptors but also chemical and DNA descriptors ([Dong *et al.*, **2018**, *J. Cheminform.*](https://jcheminf.biomedcentral.com/articles/10.1186/s13321-018-0270-2)). 
 
-### 3-4. Machine learning algorithms  
+### 3-4. Data visualization
+We attempted data visualization of the DeepLoc data set using PCA and UMAP algorithms to investigate whether protein localization is separated by their numerical representation.
