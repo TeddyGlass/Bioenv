@@ -1,0 +1,1 @@
+{"num_leaves": 17, "subsample": 0.6369734385088303, "colsample_bytree": 0.6673186357399573, "bagging_freq": 51, "min_child_weight": 1.9259340497036064, "min_child_samples": 5.0, "min_split_gain": 6.069350427385478e-05}

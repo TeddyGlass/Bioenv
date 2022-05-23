@@ -28,7 +28,6 @@ class Trainer:
         self.train_rmse = []
         self.valid_rmse = []
 
-
     def fit(self,
             X_train, y_train, X_valid, y_valid,
             early_stopping_rounds):
@@ -93,13 +92,16 @@ class Trainer:
             self.valid_logloss = np.array(history.history['val_loss'])
         
         elif 'RandomForest' in self.model_type:
+            X_train[np.isnan(X_train)] = 0
             self.model.fit(
                 X_train,
                 y_train,
             )
-        
-        elif 'SV' in self.model:
-            self.mode.fit(
+
+        elif 'SVM' in self.model_type:
+            X_train = X_train
+            X_train[np.isnan(X_train)] = 0
+            self.model.fit(
                 X_train,
                 y_train,
             )
@@ -122,10 +124,10 @@ class Trainer:
                 return self.model.predict_proba(X)[:,1]
             elif 'Regressor' in self.model_type:
                 return self.model.predict(X)
-        if 'SV' in self.model_type:
-            if 'C' in self.model_type:
+        if 'SVM' in self.model_type:
+            if 'Classifier' in self.model_type:
                 return self.model.predict_proba(X)[:,1]
-            elif 'R' in self.model_type:
+            elif 'Regressor' in self.model_type:
                 return self.model.predict(X)
 
     def get_model(self):

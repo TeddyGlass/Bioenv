@@ -53,7 +53,6 @@ def evaluate_reg(y_true, y_pred):
     metrics = {'r2': [r2], 'mae': [mae], 'rmse': [rmse], 'mse': [mse]}
     return metrics
 
-
 def set_params(trainer, config_path, best_params_path):
     model_name = type(trainer.get_model()).__name__
     config = configparser.ConfigParser()

@@ -61,3 +61,20 @@ Bio-embeddings is a Python package to calculate sequence embedding for amino aci
 
 ### 3-4. Data visualization
 We attempted data visualization of the DeepLoc data set using PCA and UMAP algorithms to investigate whether protein localization is separated by their numerical representation.
+
+## 4. Results
+### 4-1. Visualization of protein representations
+Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 contains 10 kind of protein localization information, compressed with PCA (Fig. 1) or UMAP (Fig. 2). Fig.3-4 shows tow kind of protein localization, i.e., soluble or membrane-binding, compressed with PCA (Fig. 3) or UMAP (Fig. 4).  
+
+
+**Fig.1**
+![pca_all](/results/DeepLocAll_PCA.png)
+
+**Fig.2**
+![ummap_all](/results/DeepLocAll_UMAP.png)
+
+**Fig.3**
+![pca_ms](/results/DeepLocMS_PCA.png)
+
+**Fig.4**
+![umap_ms](/results/DeepLocMS_UMAP.png)

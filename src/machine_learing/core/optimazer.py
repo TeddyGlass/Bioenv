@@ -1,12 +1,12 @@
-from trainer import Trainer
+from machine_learing.core.trainer import Trainer
 from sklearn.metrics import log_loss
-from utils import root_mean_squared_error
+from machine_learing.core.utils import root_mean_squared_error
 from sklearn.model_selection import StratifiedKFold, KFold
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.svm import SVC, SVR
 from xgboost import XGBRegressor, XGBClassifier
 from lightgbm import LGBMRegressor, LGBMClassifier
-from neuralnetwork import NNRegressor, NNClassifier
+from machine_learing.core.neural_network import NNRegressor, NNClassifier
+from machine_learing.core.suppor_tvector_machines import SVMClassifier, SVMRegressor
 import numpy as np
 import optuna
 
@@ -66,18 +66,18 @@ class Objective:
         elif 'NN' in self.model_type:
             self.SPACE = {
                 "input_dropout": trial.suggest_uniform(
-                    "input_dropout", 0.01, 0.4),
+                    "input_dropout", 0.001, 0.01),
                 "hidden_layers": trial.suggest_int(
-                    "hidden_layers", 1, 2),
+                    "hidden_layers", 3, 5),
                 'hidden_units': int(trial.suggest_discrete_uniform(
-                    'hidden_units', 64, 256, 64)),
+                    'hidden_units', 128, 1024, 128)),
                 'hidden_dropout': trial.suggest_uniform(
-                    'hidden_dropout', 0.01, 0.4),
+                    'hidden_dropout', 0.001, 0.01),
                 'batch_norm': trial.suggest_categorical(
                     'batch_norm', ['before_act', 'non']),
                 'batch_size': int(trial.suggest_discrete_uniform(
                     'batch_size', 32, 128, 16)),
-                'learning_rate': 1e-5,
+                'learning_rate': 1e-3,
                 'epochs': 10000
             }
         elif 'RandomForest' in self.model_type:
@@ -91,9 +91,9 @@ class Objective:
             }
         elif 'SV' in self.model_type:
             self.SPACE = {
-                'C': trial.suggest_goluniform(
+                'C': trial.suggest_loguniform(
                    'C', 1e-2, 1e3 ),
-                'gamma': trial.suggest_goluniform(
+                'gamma': trial.suggest_loguniform(
                    'gamma', 1e-2, 1e3 )
             }
         # splitting type of cross validation
@@ -124,11 +124,11 @@ class Objective:
                     model_ = Trainer(RandomForestClassifier(**self.SPACE))
                 elif 'Regressor' in self.model_type:
                     model_ = Trainer(RandomForestRegressor(**self.SPACE))
-            elif 'SV' in self.model_type:
-                if 'C' in self.model_type:
-                    model_ = Trainer(SVC(**self.SPACE))
-                elif 'R' in self.model_type:
-                    model_ = Trainer(SVR(**self.SPACE))
+            elif 'SVM' in self.model_type:
+                if 'Classifier' in self.model_type:
+                    model_ = Trainer(SVMClassifier(**self.SPACE))
+                elif 'Regressor' in self.model_type:
+                    model_ = Trainer(SVMRegressor(**self.SPACE))
             model_.fit(
                 self.x[tr_idx],
                 self.y[tr_idx],
@@ -137,9 +137,9 @@ class Objective:
                 self.early_stopping_rounds
             )
             y_pred = model_.predict(self.x[va_idx])  # best_iteration
-            if 'Classifier' in self.model_type or 'SVC' in self.model_type:
+            if 'Classifier' in self.model_type:
                 loss = log_loss(self.y[va_idx], y_pred)
-            elif 'Regressor' in self.model_type or 'SVR' in self.model_type:
+            elif 'Regressor' in self.model_type:
                 loss = root_mean_squared_error(self.y[va_idx], y_pred)
             LOSS.append(loss)
         return np.mean(LOSS)
