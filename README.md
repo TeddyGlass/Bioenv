@@ -62,8 +62,8 @@ Bio-embeddings is a Python package to calculate sequence embedding for amino aci
 ### 3-4. Data visualization
 We attempted data visualization of the DeepLoc data set using PCA and UMAP algorithms to investigate whether protein localization is separated by their numerical representation.
 
-### 3-5. Prediction with Machine learning
-We evaluated predictive performances of five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) to evaluate goodness of each protein representations. Endpoints of the prediction were protein localization classification (membrane-binding protein or soluble one) and PPI classification. Details of the verified pairs of algorithms and input features were shown in following table.
+### 3-5. Prediction using machine learning
+ We evaluated predictive performances of five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) to evaluate goodness of each protein representations. Endpoints of the prediction were protein localization classification (membrane-binding protein or soluble one) and PPI classification. Details of the verified pairs of algorithms and input features were shown in following table.
 |  **ID**  | **Algorithm**  | **Feature** | 
 | :---- | :----: | :----: |
 |  1   | LGB | BERT |
@@ -96,6 +96,19 @@ We evaluated predictive performances of five machine leanring algorithms, i.e., 
 |  28   | RF | Autcorrelation |
 |  29   | SVM | Autcorrelation |
 |  30   | NNs | Autcorrelation |
+
+### 3-6. Nested cross validation
+ML models were optimized outer-five-fold and inner-three-fold nested cross validation, and were trained in outer-five-fold and inner-five-fold nested cross validation. External validation was performed by evaluating the predictive performance with an outer 5-fold cross-validation.
+
+### 3-7. Hyper parameter optimization
+Hyper parameters of each ML model were optimized by Bayesian optimization implemented by optuna library. We searched for optimal hyper parameters that minimize avarege avarage value of logloss in inner-three-fold cross validation.
+
+### 3-8. Evaluation metrics
+* AUC  
+* ACC  
+* SE  
+* SP  
+* MCC
 
 ## 4. Results
 ### 4-1. Visualization of protein representations
