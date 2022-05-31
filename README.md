@@ -78,3 +78,6 @@ Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 c
 
 **Fig.4**
 ![umap_ms](/results/DeepLocMS_UMAP.png)
+
+### 4-2. Machine learning performance
+Five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) were used to evaluate goodness of each protein representations.
