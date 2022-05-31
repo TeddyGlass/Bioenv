@@ -62,6 +62,41 @@ Bio-embeddings is a Python package to calculate sequence embedding for amino aci
 ### 3-4. Data visualization
 We attempted data visualization of the DeepLoc data set using PCA and UMAP algorithms to investigate whether protein localization is separated by their numerical representation.
 
+### 3-5. Prediction with Machine learning
+We evaluated predictive performances of five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) to evaluate goodness of each protein representations. Endpoints of the prediction were protein localization classification (membrane-binding protein or soluble one) and PPI classification. Details of the verified pairs of algorithms and input features were shown in following table.
+|  **ID**  | **Algorithm**  | **Feature** | 
+| :---- | :----: | :----: |
+|  1   | LGB | BERT |
+|  2   | XGB | BERT |
+|  3   | RF | BERT |
+|  4   | SVM | BERT |
+|  5   | NNs | BERT |
+|  6   | LGB | Albert |
+|  7   | XGB | Albert |
+|  8   | RF | Albert |
+|  9   | SVM | Albert |
+|  10   | NNs | Albert |
+|  11   | LGB | T5 |
+|  12   | XGB | T5 |
+|  13   | RF | T5 |
+|  14   | SVM | T5 |
+|  15   | NNs | T5 |
+|  16   | LGB | T5FT |
+|  17   | XGB | T5FT |
+|  18   | RF | T5FT |
+|  19   | SVM | T5FT |
+|  20   | NNs | T5FT |
+|  21   | LGB | AAindex |
+|  22   | XGB | AAindex |
+|  23   | RF | AAindex |
+|  24   | SVM | AAindex |
+|  25   | NNs | AAindex |
+|  26   | LGB | Autcorrelation |
+|  27   | XGB | Autcorrelation |
+|  28   | RF | Autcorrelation |
+|  29   | SVM | Autcorrelation |
+|  30   | NNs | Autcorrelation |
+
 ## 4. Results
 ### 4-1. Visualization of protein representations
 Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 contains 10 kind of protein localization information, compressed with PCA (Fig. 1) or UMAP (Fig. 2). Fig.3-4 shows tow kind of protein localization, i.e., soluble or membrane-binding, compressed with PCA (Fig. 3) or UMAP (Fig. 4).  
@@ -80,4 +115,4 @@ Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 c
 ![umap_ms](/results/DeepLocMS_UMAP.png)
 
 ### 4-2. Machine learning performance
-Five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) were used to evaluate goodness of each protein representations.
+We evaluated predictive performances of five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) to evaluate goodness of each protein representations. Endpoint of the prediction were protein localization classification (membrane-binding protein or soluble one) and PPI classification.
