@@ -132,10 +132,11 @@ Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 c
 These results were based on a single fold of external validation.
 |  **ID**  | **Algorithm**  | **Feature** | **AUC** | **ACC** | **SE** | **SP** | **BAC** | **MCC** | **cutoff** |
 | :---- | :----: | :----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: |
-|  1   | LGB | BERT |0.916597956	| 0.864529473	| 0.821882952	| 0.893728223	| 0.857805587	| 0.718339	 | 0.317997579 |
-|  3   | RF | BERT |
-|  4   | SVM | BERT |
-|  6   | LGB | Albert |
+|  1   | LGB | BERT | 0.916597956	| 0.864529473	| 0.821882952	| 0.893728223	| 0.857805587	| 0.718339	 | 0.317997579 |
+|  3   | RF | BERT | 0.885593709	| 0.825232678	| 0.659033079	| 0.93902439	| 0.799028735	| 0.638577986	| 0.472167014 |
+|  4   | SVM | BERT | 0.839266874	| 0.815925543	| 0.786259542	| 0.836236934	| 0.811248238	| 0.620150422	| 0.393978849 |
+|  6   | LGB | Albert |0.920991037	0.844881075	0.809160305	0.869337979	0.839249142	0.678498284	0.291703777![image](https://user-images.githubusercontent.com/39366279/171129837-c6806abd-892b-4e64-95fe-a289108fda86.png)
+
 |  8   | RF | Albert |
 |  9   | SVM | Albert |
 |  11   | LGB | T5 |
