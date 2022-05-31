@@ -108,6 +108,7 @@ Hyper parameters of each ML model were optimized by Bayesian optimization implem
 * ACC  
 * SE  
 * SP  
+* BAC
 * MCC
 
 ## 4. Results
@@ -128,4 +129,18 @@ Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 c
 ![umap_ms](/results/DeepLocMS_UMAP.png)
 
 ### 4-2. Machine learning performance
-We evaluated predictive performances of five machine leanring algorithms, i.e., lightgbm (LGB), xgboost (XGB), random forest (RF), support vector machines (SVM), and neural networkswas (NNs) to evaluate goodness of each protein representations. Endpoint of the prediction were protein localization classification (membrane-binding protein or soluble one) and PPI classification.
+These results were based on a single fold of external validation.
+|  **ID**  | **Algorithm**  | **Feature** | **AUC** | **ACC** | **SE** | **SP** | **BAC** | **MCC** | **cutoff** |
+| :---- | :----: | :----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: |
+|  1   | LGB | BERT |0.916597956	| 0.864529473	| 0.821882952	| 0.893728223	| 0.857805587	| 0.718339	 | 0.317997579 |
+|  3   | RF | BERT |
+|  4   | SVM | BERT |
+|  6   | LGB | Albert |
+|  8   | RF | Albert |
+|  9   | SVM | Albert |
+|  11   | LGB | T5 |
+|  13   | RF | T5 |
+|  14   | SVM | T5 |
+|  16   | LGB | T5FT |
+|  18   | RF | T5FT |
+|  19   | SVM | T5FT |
