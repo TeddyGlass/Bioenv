@@ -104,9 +104,14 @@ ML models were optimized outer-five-fold and inner-three-fold nested cross valid
 Hyper parameters of each ML model were optimized by Bayesian optimization implemented by optuna library. We searched for optimal hyper parameters that minimize avarege value of logloss in inner-three-fold cross validation.
 
 ### 3-8. Evaluation metrics
+2×2 confusion matrix
+|  **ID**  | **Positive_obs**  | **Negative_obs** |
+|  **Positive_pred**  | $TP$ | $FT$ |
+|  **Negative_pred**  | $FN$ | $TN$ |
+
 * AUC  
 * ACC  
-$$hoge$$
+$$ACC = \frac{TP + TN}{TP + TN + FT + FN }$$
 * SE  
 * SP  
 * BAC
