@@ -4,18 +4,19 @@ from sklearn.preprocessing import QuantileTransformer
 
 class SVMClassifier():
 
-    def __init__(self, kernel='rbf', C=1.0, gamma='auto'):
+    def __init__(self, kernel='rbf', C=1.0, gamma='auto', random_state=0):
         self.params = {
             'kernel': kernel,
             'C':C,
             'gamma':gamma,
+            'random_state':random_state,
             'probability':True
         }
     
     def fit(self, X, y):
         self.transformer = QuantileTransformer(
             n_quantiles=100,
-            random_state=0, 
+            random_state=0,
             output_distribution='normal'
             )
         X = self.transformer.fit_transform(X) 
@@ -29,11 +30,12 @@ class SVMClassifier():
 
 class SVMRegressor():
 
-    def __init__(self, kernel='rbf', C=1.0, gamma='auto'):
+    def __init__(self, kernel='rbf', C=1.0, gamma='auto', random_state=0):
         self.params = {
             'kernel': kernel,
             'C':C,
             'gamma':gamma,
+            'random_state':random_state,
         }
 
     def fit(self, X, y):

@@ -7,6 +7,7 @@ from xgboost import XGBRegressor, XGBClassifier
 from lightgbm import LGBMRegressor, LGBMClassifier
 from machine_learing.core.neural_network import NNRegressor, NNClassifier
 from machine_learing.core.suppor_tvector_machines import SVMClassifier, SVMRegressor
+from machine_learing.settings.parameters import init_fit_params
 import numpy as np
 import optuna
 
@@ -21,8 +22,9 @@ class Objective:
     study.optimize(obj, n_trials=10, n_jobs=-1)
     '''
 
-    def __init__(self, model, x, y, n_splits, early_stopping_rounds, random_state):
+    def __init__(self, model, path_to_config, x, y, n_splits, early_stopping_rounds, random_state):
         self.model = model
+        self.path_to_config = path_to_config
         self.model_type = type(self.model.get_model()).__name__
         self.x = x
         self.y = y
@@ -46,8 +48,9 @@ class Objective:
                 'min_split_gain': trial.suggest_loguniform(
                     'min_split_gain', 1e-5, 1e-1),
                 'learning_rate': 0.05,
-                'n_estimators': 1000000,
-                'random_state': 1112
+                'n_estimators': init_fit_params('lgb_params', self.path_to_config)['n_estimators'],
+                'random_state': init_fit_params('lgb_params', self.path_to_config)['random_state'],
+                'max_depth':init_fit_params('lgb_params', self.path_to_config)['max_depth']
             }
         elif 'XGB' in self.model_type:
             self.SPACE = {
@@ -60,8 +63,9 @@ class Objective:
                 'min_child_weight': trial.suggest_loguniform(
                     'min_child_weight', 1, 32),
                 'learning_rate': 0.05,
-                'n_estimators': 1000000,
-                'random_state': 1112
+                'max_depth':init_fit_params('xgb_params', self.path_to_config)['max_depth'],
+                'n_estimators': init_fit_params('xgb_params', self.path_to_config)['n_estimators'],
+                'random_state': init_fit_params('xgb_params', self.path_to_config)['random_state']
             }
         elif 'NN' in self.model_type:
             self.SPACE = {
@@ -78,7 +82,7 @@ class Objective:
                 'batch_size': int(trial.suggest_discrete_uniform(
                     'batch_size', 32, 128, 16)),
                 'learning_rate': 1e-3,
-                'epochs': 10000
+                'epochs': init_fit_params('nn_params', self.path_to_config)['epochs']
             }
         elif 'RandomForest' in self.model_type:
             self.SPACE = {
@@ -87,14 +91,16 @@ class Objective:
                 'min_samples_split':trial.suggest_int(
                     'min_samples_split', 16, 64),
                 'max_features': trial.suggest_uniform(
-                    'max_features', 0.5, 0.8)
+                    'max_features', 0.5, 0.8),
+                'random_state': init_fit_params('rf_params', self.path_to_config)['random_state']
             }
-        elif 'SV' in self.model_type:
+        elif 'SVM' in self.model_type:
             self.SPACE = {
                 'C': trial.suggest_loguniform(
                    'C', 1e-2, 1e3 ),
                 'gamma': trial.suggest_loguniform(
-                   'gamma', 1e-2, 1e3 )
+                   'gamma', 1e-2, 1e3 ),
+                'random_state': init_fit_params('svm_params', self.path_to_config)['random_state']
             }
         # splitting type of cross validation
         if 'Classifier' in self.model_type or 'SVC' in self.model_type:

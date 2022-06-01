@@ -1,1 +1,1 @@
-{"num_leaves": 12, "subsample": 0.7464179537172324, "colsample_bytree": 0.7395857407777424, "bagging_freq": 41, "min_child_weight": 2.1394280650917423, "min_child_samples": 30.0, "min_split_gain": 5.6407869162302254e-05}
+{"num_leaves": 27, "subsample": 0.6589277639147415, "colsample_bytree": 0.7154716659819226, "bagging_freq": 41, "min_child_weight": 20.542707678805435, "min_child_samples": 10.0, "min_split_gain": 0.005401063607682886}

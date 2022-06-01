@@ -1,1 +1,1 @@
-{"input_dropout": 0.005408072503191027, "hidden_layers": 5, "hidden_units": 640.0, "hidden_dropout": 0.005145007004062509, "batch_norm": "non", "batch_size": 48.0}
+{"input_dropout": 0.004355989238329437, "hidden_layers": 4, "hidden_units": 256.0, "hidden_dropout": 0.007127328522136585, "batch_norm": "non", "batch_size": 128.0}

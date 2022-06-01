@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from regex import F
 import seaborn as sns
 
 
@@ -47,7 +48,7 @@ class Trainer:
                 early_stopping_rounds=early_stopping_rounds,
                 eval_set=eval_set,
                 eval_metric=eval_metric,
-                verbose=False
+                verbose=True
             )
             self.best_iteration = self.model.best_iteration_
             self.train_logloss = np.array(
