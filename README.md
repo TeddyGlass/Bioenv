@@ -111,7 +111,7 @@ Hyper parameters of each ML model were optimized by Bayesian optimization implem
 |  **Negative_pred**  | $FN$ | $TN$ |
 
 * AUC  
-* Accuracy is defined as the ratio of corrective prediction for all samples that undistinguish $TP$ and $TN$.
+* Accuracy is defined as the ratio of corrective prediction for all samples that dose not distinguish $TP$ and $TN$.
 $$ACC = \frac{TP + TN}{TP + TN + FT + FN }$$
 * SE  
 * SP  
