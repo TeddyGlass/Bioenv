@@ -119,7 +119,9 @@ $$ACC = \frac{TP + TN}{TP + TN + FT + FN }$$
 $$SP = \frac{TN}{TN + FP}$$
 * The balanced accuracy (BAC) is the average between the SE and SP:  
 $$BAC = \frac{1}{2} (SE + SP)$$
-* MCC
+* The Matthews correlation coefficient (MCC) measures the classification accuracy of models for an unbalanced dataset (Matthews, 1975):
+$${\displaystyle {\text{MCC}}={\frac {{\mathit {TP}}\times {\mathit {TN}}-{\mathit {FP}}\times {\mathit {FN}}}{\sqrt {({\mathit {TP}}+{\mathit {FP}})({\mathit {TP}}+{\mathit {FN}})({\mathit {TN}}+{\mathit {FP}})({\mathit {TN}}+{\mathit {FN}})}}}}$$
+
 
 ## 4. Results
 ### 4-1. Visualization of protein representations
