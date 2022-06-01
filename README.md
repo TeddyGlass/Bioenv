@@ -98,7 +98,7 @@ We attempted data visualization of the DeepLoc data set using PCA and UMAP algor
 |  30   | NNs | Autcorrelation |
 
 ### 3-6. Nested cross validation
-ML models were optimized outer-five-fold and inner-three-fold nested cross validation. ML models were trained in outer-five-fold and inner-five-fold nested cross validation. External validation was performed by evaluating the predictive performance with an outer 5-fold cross-validation.
+ML models were optimized outer-five-fold and inner-three-fold nested cross validation. External validation was performed by evaluating the predictive performance with an outer 5-fold cross-validation.
 
 ### 3-7. Hyper parameter optimization
 Hyper parameters of each ML model were optimized by Bayesian optimization implemented by optuna library. We searched for optimal hyper parameters that minimize avarege avarage value of logloss in inner-three-fold cross validation.
