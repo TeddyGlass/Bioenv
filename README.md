@@ -105,7 +105,8 @@ Hyper parameters of each ML model were optimized by Bayesian optimization implem
 
 ### 3-8. Evaluation metrics
 2×2 confusion matrix
-|  **ID**  | **Positive_obs**  | **Negative_obs** |
+|    | **Positive_obs**  | **Negative_obs** |
+| :---- | :----: | :---: |
 |  **Positive_pred**  | $TP$ | $FT$ |
 |  **Negative_pred**  | $FN$ | $TN$ |
 
