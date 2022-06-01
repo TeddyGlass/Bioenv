@@ -110,12 +110,15 @@ Hyper parameters of each ML model were optimized by Bayesian optimization implem
 |  **Positive_pred**  | $TP$ | $FT$ |
 |  **Negative_pred**  | $FN$ | $TN$ |
 
-* AUC  
+* The receiver operating characteristic–area under the curve (ROC–AUC) graphs the performance of a classification model at all thresholds. This curve plots two parameters: the sensitivity (SE) and specificity (SP).  
 * Accuracy is defined as the ratio of corrective prediction for all samples that dose not distinguish $TP$ and $TN$.
 $$ACC = \frac{TP + TN}{TP + TN + FT + FN }$$
-* SE  
-* SP  
-* BAC
+* The SE is defined as the prediction accuracy when the true outcome is positive:  
+ $$SE = \frac{TP}{TP + FN}$$
+* The SP is defined as the prediction accuracy when the true outcome is negative:  
+$$SP = \frac{TN}{TN + FP}$$
+* The balanced accuracy (BAC) is the average between the SE and SP:  
+$$BAC = \frac{1}{2} (SE + SP)$$
 * MCC
 
 ## 4. Results
