@@ -34,6 +34,7 @@ def init_fit_params(section, path_to_config):
         FIT_PARAMS['max_features'] = float(config.get(section, 'max_features'))
         FIT_PARAMS['n_jobs'] = int(config.get(section, 'n_jobs'))
         FIT_PARAMS['random_state'] = int(config.get(section, 'random_state'))
+        FIT_PARAMS['verbose'] = int(config.get(section, 'verbose'))
     elif section == 'svm_params':
         FIT_PARAMS['kernel'] = config.get(section, 'kernel')
         FIT_PARAMS['C'] = float(config.get(section, 'C'))

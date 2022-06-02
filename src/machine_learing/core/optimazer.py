@@ -81,7 +81,7 @@ class Objective:
                     'batch_norm', ['before_act', 'non']),
                 'batch_size': int(trial.suggest_discrete_uniform(
                     'batch_size', 32, 128, 16)),
-                'learning_rate': 1e-3,
+                'learning_rate': 1e-4,
                 'epochs': init_fit_params('nn_params', self.path_to_config)['epochs']
             }
         elif 'RandomForest' in self.model_type:

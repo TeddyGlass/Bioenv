@@ -67,7 +67,7 @@ class Trainer:
                 early_stopping_rounds=early_stopping_rounds,
                 eval_set=eval_set,
                 eval_metric=eval_metric,
-                verbose=0
+                verbose=1
             )
             self.best_iteration = self.model.best_iteration
             self.train_logloss = np.array(

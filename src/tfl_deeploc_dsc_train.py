@@ -19,16 +19,10 @@ if __name__ == '__main__':
     root = os.getcwd()
 
     f_names = [
-        'DeepLocEmbedd_BERT_BFD.csv',
-        'DeepLocEmbedd_Albert_BFD.csv',
-        'DeepLocEmbedd_T5_BFD.csv',
-        'DeepLocEmbedd_T5_FT.csv'
+        'DeepLocDescriptorAAindex.csv',
     ]
     out_dirs = [
-        'DeepLocBERT',
-        'DeepLocAlbert',
-        'DeepLocT5',
-        'DeepLocT5FT'
+        'DeepLocAAindex'
     ]
 
     for f_name, out_dir in zip(f_names, out_dirs):
@@ -40,10 +34,10 @@ if __name__ == '__main__':
 
         # load data set
         df = pd.read_csv(f'../data/DeepLoc/{f_name}')
-        M_idx = df.iloc[:,1]=='M'
-        S_idx = df.iloc[:,1]=='S'
+        M_idx = df.iloc[:,2]=='M'
+        S_idx = df.iloc[:,2]=='S'
         df = pd.concat([df[M_idx], df[S_idx]], axis=0)
-        X = np.array(df.iloc[:,2:])
+        X = np.array(df.iloc[:,3:])
         y = np.concatenate([np.array([1]*sum(M_idx)), np.array([0]*sum(S_idx))]).flatten()
         print('X_shape', X.shape)
         print('y_shape', y.shape)
