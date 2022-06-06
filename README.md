@@ -98,7 +98,7 @@ We attempted data visualization of the DeepLoc data set using PCA and UMAP algor
 |  30   | NNs | Autcorrelation |
 
 ### 3-6. Nested cross validation
-ML models were optimized outer-five-fold and inner-three-fold nested cross validation. External validation was performed by evaluating the predictive performance with an outer 5-fold cross-validation.
+ML models were optimized outer-five-fold and inner-five-fold nested cross validation. External validation was performed by evaluating the predictive performance with an outer 5-fold cross-validation.
 
 ### 3-7. Hyper parameter optimization
 Hyper parameters of each ML model were optimized by Bayesian optimization implemented by optuna library. We searched for optimal hyper parameters that minimize avarege value of logloss in inner-three-fold cross validation.
@@ -147,12 +147,16 @@ These results were based on a single fold of external validation.
 |  1   | LGB | BERT | 0.916597956	| 0.864529473 | 0.821882952	| 0.893728223	| 0.857805587	| 0.718339	 | 0.317997579 |
 |  3   | RF | BERT | 0.885593709	| 0.825232678	| 0.659033079	| 0.93902439	| 0.799028735	| 0.638577986	| 0.472167014 |
 |  4   | SVM | BERT | 0.839266874	| 0.815925543	| 0.786259542	| 0.836236934	| 0.811248238	| 0.620150422	| 0.393978849 |
+|  5   | NNs | BERT | 0.9158000195	| 0.8490175801	| 0.8218829517	| 0.8675958188	| 0.8447393852	| 0.6878797174	| 0.3519498706	|
 |  6   | LGB | Albert | 0.920991037	| 0.844881075	| 0.809160305	| 0.869337979	| 0.839249142	| 0.678498284	| 0.291703777 |
 |  8   | RF | Albert | 0.859625325	| 0.804550155	| 0.648854962	| 0.911149826 | 0.780002394	| 0.591401632	| 0.46296315 |
 |  9   | SVM | Albert | 0.494855529	| 0.593588418	| 0	| 1	| 0.5	| 0	| 1.406519034 |
+|  10   | NNs | Albert | 0.9257387558	| 0.8645294726	| 0.8320610687	| 0.8867595819	| 0.8594103253	| 0.7191107991	| 0.3182281256 |
 |  11   | LGB | T5 | 0.936200583	| 0.855222337	| 0.86259542	| 0.850174216	| 0.856384818	| 0.705354276	| 0.276454328 |
 |  13   | RF | T5 | 0.903219228	| 0.807652534	| 0.839694656	| 0.785714286	| 0.81270447	| 0.615581625	| 0.349313724 |
 |  14   | SVM | T5 | 0.864701084	| 0.830403309	| 0.82697201	| 0.832752613	| 0.829862312	| 0.653548084	| 0.393951783|
+|  15   | NNs | T5 | 0.9419767535	| 0.8738366081	| 0.8727735369	| 0.8745644599	| 0.8736689984	| 0.7416102058	| 0.302672714 |
 |  16   | LGB | T5FT | 0.940309954	| 0.872802482	| 0.837150127	| 0.897212544	| 0.867181335	| 0.735881135	| 0.281512104 |
 |  18   | RF | T5FT | 0.908206329	| 0.825232678	| 0.854961832	| 0.804878049	| 0.82991994	| 0.649932263	| 0.366192492 |
 |  19   | SVM | T5FT |0.868059065	| 0.830403309	| 0.847328244	| 0.818815331	| 0.833071788	| 0.657417729	| 0.374340922|
+|  20   | NNs | T5FT | 0.9379338777	| 0.8769389866	| 0.7989821883	| 0.9303135889	| 0.8646478886	| 0.7435737539	| 0.4507674873 |
