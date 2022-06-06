@@ -141,7 +141,7 @@ Dimensionally compressed protein representations were shown in Fig1-4. Fig.1-2 c
 ![umap_ms](/results/DeepLocMS_UMAP.png)
 
 ### 4-2. Machine learning performance
-These results were based on a single fold of external validation.
+These results were based on a single fold of external validation.  
 4-2-1. LM 
 |  **ID**  | **Algorithm**  | **Feature** | **AUC** | **ACC** | **SE** | **SP** | **BAC** | **MCC** | **cutoff** |
 | :---- | :----: | :----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: |
