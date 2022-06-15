@@ -74,7 +74,7 @@ class Objective:
                 "hidden_layers": trial.suggest_int(
                     "hidden_layers", 3, 5),
                 'hidden_units': int(trial.suggest_discrete_uniform(
-                    'hidden_units', 128, 1024, 128)),
+                    'hidden_units', 512, 2048, 512)),
                 'hidden_dropout': trial.suggest_uniform(
                     'hidden_dropout', 0.001, 0.01),
                 'batch_norm': trial.suggest_categorical(
