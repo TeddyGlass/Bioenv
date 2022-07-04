@@ -14,6 +14,21 @@ import configparser
 import pickle
 
 
+def fill_na_mean(X):
+    X_filled = np.zeros((X.shape[0], X.shape[1]))
+    for col_idx in range(X.shape[1]):
+        vertical_vector = X[:, col_idx]
+        if np.isnan(vertical_vector).sum() > 0:
+            vertical_vector = np.nan_to_num(
+                vertical_vector,
+                nan=np.nanmean(vertical_vector)
+                )
+            X_filled[:, col_idx] = vertical_vector
+        else:
+            X_filled[:, col_idx] = vertical_vector
+    return X_filled
+
+
 def roc_cutoff(y_true, y_pred):
     fpr, tpr, thresholds = roc_curve(y_true, y_pred)
     cutoff = thresholds[np.argmax(tpr - fpr)]
@@ -52,6 +67,7 @@ def evaluate_reg(y_true, y_pred):
     r2 = r2_score(y_true, y_pred)
     metrics = {'r2': [r2], 'mae': [mae], 'rmse': [rmse], 'mse': [mse]}
     return metrics
+
 
 def set_params(trainer, config_path, best_params_path):
     model_name = type(trainer.get_model()).__name__

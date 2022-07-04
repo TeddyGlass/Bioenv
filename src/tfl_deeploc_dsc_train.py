@@ -4,6 +4,7 @@ import pickle
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
+from machine_learing.core.utils import fill_na_mean
 from machine_learing.settings.parameters import init_fit_params
 from machine_learing.core.trainer import Trainer
 from machine_learing.core.neural_network import NNClassifier
@@ -19,10 +20,12 @@ if __name__ == '__main__':
     root = os.getcwd()
 
     f_names = [
-        'DeepLocDescriptorAAindex.csv',
+        # 'DeepLocDescriptorAAindex.csv',
+        'DeepLocDescriptorAutocorrelation.csv'
     ]
     out_dirs = [
-        'DeepLocAAindex'
+        # 'DeepLocAAindex',
+        'DeepLocAutocorr'
     ]
 
     for f_name, out_dir in zip(f_names, out_dirs):
@@ -50,7 +53,7 @@ if __name__ == '__main__':
             path_to_config = os.path.join(root, 'machine_learing/settings/config.ini')
             if os.path.exists(path_to_config):
                     PARAMS = {
-                    'lgb':init_fit_params('lgb_params', path_to_config),
+                    # 'lgb':init_fit_params('lgb_params', path_to_config),
                     # 'xgb':init_fit_params('xgb_params', path_to_config),
                     'rf':init_fit_params('rf_params', path_to_config),
                     'svm':init_fit_params('svm_params', path_to_config),
@@ -106,22 +109,32 @@ if __name__ == '__main__':
                         elif k == 'nn':
                             model = Trainer(NNClassifier(**fit_params))
                         model_type = type(model.get_model()).__name__
+                        # processing of features
+                        if k == 'rf' or k == 'svm' or k == 'nn':
+                            X_train = fill_na_mean(X[inner_idx][tr_idx])
+                            X_valid = fill_na_mean(X[inner_idx][va_idx])
+                        else:
+                            X_train = X[inner_idx][tr_idx]
+                            X_valid = X[inner_idx][va_idx]
                         print('-'*100)
                         print(f'Outer forld: {i}')
                         print('data', out_dir)
                         print(f'Training of {model_type} (fold {j+1}/{n_splits_ncv}) has begun with following parameters')
                         print(fit_params)
                         model.fit(
-                                X[inner_idx][tr_idx],
+                                # X[inner_idx][tr_idx],
+                                X_train,
                                 y[inner_idx][tr_idx],
-                                X[inner_idx][va_idx],
+                                # X[inner_idx][va_idx],
+                                X_valid,
                                 y[inner_idx][va_idx],
                                 early_stopping_rounds
                             )
                         print(f'Training (fold {j+1}) has been been completed.')
                         print('-'*100)
-                        # prediction and evaluation
-                        y_pred = model.predict(X[inner_idx][va_idx])
+                        # prediction and evaluation of validation set
+                        # y_pred = model.predict(X[inner_idx][va_idx])
+                        y_pred = model.predict(X_valid)
                         cutoff = roc_cutoff(y[inner_idx][va_idx], y_pred)
                         metrics = evaluate_clf(y[inner_idx][va_idx], y_pred, cutoff) # check!
                         METRICS.append(pd.DataFrame(metrics))

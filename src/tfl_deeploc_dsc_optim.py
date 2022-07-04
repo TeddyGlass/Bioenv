@@ -8,6 +8,7 @@ from machine_learing.core.neural_network import NNClassifier
 from machine_learing.core.suppor_tvector_machines import SVMClassifier
 from machine_learing.core.optimazer import optuna_search, Objective
 from machine_learing.core.trainer import Trainer
+from machine_learing.core.utils import fill_na_mean
 from machine_learing.settings.parameters import init_fit_params
 import os
 import json
@@ -18,10 +19,12 @@ if __name__ == '__main__':
     root = os.getcwd()
 
     f_names = [
-        'DeepLocDescriptorAAindex.csv',
+        # 'DeepLocDescriptorAAindex.csv',
+        'DeepLocDescriptorAutocorrelation.csv'
     ]
     out_dirs = [
-        'DeepLocAAindex'
+        # 'DeepLocAAindex',
+        'DeepLocAutocorr'
     ]
 
     for f_name, out_dir in zip(f_names, out_dirs):
@@ -56,14 +59,15 @@ if __name__ == '__main__':
                 path_to_config = os.path.join(root, 'machine_learing/settings/config.ini')
                 if os.path.exists(path_to_config):    
                     PARAMS = {
-                        'lgb':init_fit_params('lgb_params', path_to_config),
+                        # 'lgb':init_fit_params('lgb_params', path_to_config),
                         # 'xgb':init_fit_params('xgb_params', path_to_config),
-                        'rf':init_fit_params('rf_params', path_to_config),
-                        'svm':init_fit_params('svm_params', path_to_config),
+                        # 'rf':init_fit_params('rf_params', path_to_config),
+                        # 'svm':init_fit_params('svm_params', path_to_config),
                         'nn':init_fit_params('nn_params', path_to_config),
                     }
                 # start hyper paramneter optimization for each model
                 for k, fit_params in PARAMS.items():
+                    # set model instance
                     if k == 'lgb':
                         model = Trainer(LGBMClassifier(**fit_params))
                     elif k == 'xgb':
@@ -75,10 +79,11 @@ if __name__ == '__main__':
                     elif k == 'nn':
                         model = Trainer(NNClassifier(**fit_params))
                     model_type = type(model.get_model()).__name__
-                    
-                    print('-'*100)
-                    print(f'outer fold {i}, {out_dir}')
-                    print(f'Beyesian optimization for {model_type} model...')
+                    # processing of features
+                    if k == 'rf' or k == 'svm' or k == 'nn':
+                        X_train = fill_na_mean(X[tr_idx])
+                    else:
+                        X_train = X[tr_idx]
                     if k == 'lgb':
                         n_jobs = 8
                     else:
@@ -87,7 +92,7 @@ if __name__ == '__main__':
                     obj = Objective(
                         model,
                         path_to_config,
-                        X[tr_idx],
+                        X_train,
                         y[tr_idx],
                         n_splits_optim,
                         esr_optim,
@@ -95,6 +100,9 @@ if __name__ == '__main__':
                     )
                     print('-'*100)
                     # bayeseian optimization
+                    print('-'*100)
+                    print(f'outer fold {i}, {out_dir}')
+                    print(f'Beyesian optimization for {model_type} model...')
                     best_params = optuna_search(obj, n_trials, n_jobs, seed_optim)
                     print('completed')
                     print('best params:', best_params)
