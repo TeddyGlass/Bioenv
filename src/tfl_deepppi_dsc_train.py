@@ -19,10 +19,12 @@ if __name__ == '__main__':
     root = os.getcwd()
 
     f_names = [
-        'DeepPPIDescriptorAAindex.csv'
+        # 'DeepPPIDescriptorAAindex.csv',
+         'DeepPPIDescriptorAutocorrelation.csv'
     ]
     out_dirs = [
-        'DeepPPIAAindex'
+        # 'DeepPPIAAindex',
+        'DeepPPIAutocorr'
     ]
 
     for f_name, out_dir in zip(f_names, out_dirs):
