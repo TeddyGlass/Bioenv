@@ -57,15 +57,17 @@ if __name__ == '__main__':
         skf = StratifiedKFold(n_splits=n_splits_ncv, random_state=seed_ncv, shuffle=True) 
         idxes = list(skf.split(X, y))
         for i, (tr_idx, te_idx) in enumerate(idxes):
+            if i >= 1:
+                break
             # initialize fit params
             path_to_config = os.path.join(root, 'machine_learing/settings/config.ini')
             if os.path.exists(path_to_config):    
                 PARAMS = {
-                    'lgb':init_fit_params('lgb_params', path_to_config),
-                    'xgb':init_fit_params('xgb_params', path_to_config),
-                    'rf':init_fit_params('rf_params', path_to_config),
+                    # 'lgb':init_fit_params('lgb_params', path_to_config),
+                    # 'xgb':init_fit_params('xgb_params', path_to_config),
+                    # 'rf':init_fit_params('rf_params', path_to_config),
                     'svm':init_fit_params('svm_params', path_to_config),
-                    'nn':init_fit_params('nn_params', path_to_config),
+                    # 'nn':init_fit_params('nn_params', path_to_config),
                 }
             # start hyper paramneter optimization for each model
             for k, fit_params in PARAMS.items():

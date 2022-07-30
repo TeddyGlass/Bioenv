@@ -127,7 +127,8 @@ class Trainer:
                 return self.model.predict(X)
         if 'SVM' in self.model_type:
             if 'Classifier' in self.model_type:
-                return self.model.predict_proba(X)[:,1]
+                # return self.model.predict_proba(X)[:,1]
+                return self.model.predict_score(X)
             elif 'Regressor' in self.model_type:
                 return self.model.predict(X)
 

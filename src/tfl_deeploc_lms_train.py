@@ -56,11 +56,11 @@ if __name__ == '__main__':
             path_to_config = os.path.join(root, 'machine_learing/settings/config.ini')
             if os.path.exists(path_to_config):
                     PARAMS = {
-                    'lgb':init_fit_params('lgb_params', path_to_config),
+                    # 'lgb':init_fit_params('lgb_params', path_to_config),
                     # 'xgb':init_fit_params('xgb_params', path_to_config),
-                    'rf':init_fit_params('rf_params', path_to_config),
+                    # 'rf':init_fit_params('rf_params', path_to_config),
                     'svm':init_fit_params('svm_params', path_to_config),
-                    'nn':init_fit_params('nn_params', path_to_config),
+                    # 'nn':init_fit_params('nn_params', path_to_config),
                 }
             # update parameters
             if i == 0:

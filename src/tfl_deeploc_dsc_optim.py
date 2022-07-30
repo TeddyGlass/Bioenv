@@ -19,12 +19,12 @@ if __name__ == '__main__':
     root = os.getcwd()
 
     f_names = [
-        # 'DeepLocDescriptorAAindex.csv',
-        'DeepLocDescriptorAutocorrelation.csv'
+        'DeepLocDescriptorAAindex.csv',
+        # 'DeepLocDescriptorAutocorrelation.csv'
     ]
     out_dirs = [
-        # 'DeepLocAAindex',
-        'DeepLocAutocorr'
+        'DeepLocAAindex',
+        # 'DeepLocAutocorr'
     ]
 
     for f_name, out_dir in zip(f_names, out_dirs):
@@ -62,8 +62,8 @@ if __name__ == '__main__':
                         # 'lgb':init_fit_params('lgb_params', path_to_config),
                         # 'xgb':init_fit_params('xgb_params', path_to_config),
                         # 'rf':init_fit_params('rf_params', path_to_config),
-                        # 'svm':init_fit_params('svm_params', path_to_config),
-                        'nn':init_fit_params('nn_params', path_to_config),
+                        'svm':init_fit_params('svm_params', path_to_config),
+                        # 'nn':init_fit_params('nn_params', path_to_config),
                     }
                 # start hyper paramneter optimization for each model
                 for k, fit_params in PARAMS.items():

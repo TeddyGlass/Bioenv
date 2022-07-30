@@ -1,0 +1,2 @@
+python tfl_deeploc_lms_optim.py
+python tfl_deeploc_lms_train.py

@@ -1,7 +1,8 @@
 from machine_learing.core.trainer import Trainer
-from sklearn.metrics import log_loss
+from sklearn.metrics import log_loss, roc_auc_score
 from machine_learing.core.utils import root_mean_squared_error
 from sklearn.model_selection import StratifiedKFold, KFold
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from xgboost import XGBRegressor, XGBClassifier
 from lightgbm import LGBMRegressor, LGBMClassifier
@@ -97,9 +98,9 @@ class Objective:
         elif 'SVM' in self.model_type:
             self.SPACE = {
                 'C': trial.suggest_loguniform(
-                   'C', 1e-2, 1e3 ),
+                   'C', 1e-1, 1e2 ),
                 'gamma': trial.suggest_loguniform(
-                   'gamma', 1e-2, 1e3 ),
+                   'gamma', 1e-2, 1 ),
                 'random_state': init_fit_params('svm_params', self.path_to_config)['random_state']
             }
         # splitting type of cross validation
@@ -144,7 +145,10 @@ class Objective:
             )
             y_pred = model_.predict(self.x[va_idx])  # best_iteration
             if 'Classifier' in self.model_type:
-                loss = log_loss(self.y[va_idx], y_pred)
+                if 'SVM' in self.model_type:
+                    loss = - roc_auc_score(self.y[va_idx], y_pred)
+                else:
+                    loss = log_loss(self.y[va_idx], y_pred)
             elif 'Regressor' in self.model_type:
                 loss = root_mean_squared_error(self.y[va_idx], y_pred)
             LOSS.append(loss)
